@@ -15,7 +15,7 @@ export class Product extends BaseEntity {
   nom : string
 
   @ApiProperty()
-  @Column({type : "money"})
+  @Column()
   prix : number
 
   @ApiProperty()
