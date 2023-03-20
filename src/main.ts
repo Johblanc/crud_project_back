@@ -3,6 +3,7 @@ import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from '@nestjs/swagger/dist';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './errors/AllExceptionsFilter';
+import { ResponserInterceptor } from './interceptors/responser.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,6 +19,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+  app.useGlobalInterceptors(new ResponserInterceptor());
 
   await app.listen(3000);
 }
